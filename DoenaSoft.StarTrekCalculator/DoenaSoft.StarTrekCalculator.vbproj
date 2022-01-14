@@ -10,7 +10,7 @@
     <Product>StarTrekCalculator</Product>
     <Description>Calculates the multiple of the speed of light by the warp factor (and vice versa).
 Calculates the Stardate by the actual date (and vice versa).</Description>
-    <PackageLicenseExpression>MIT license</PackageLicenseExpression>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Copyright>2004 - 2022</Copyright>
     <PackageProjectUrl>https://github.com/DJDoena/DoenaSoft.StarTrekCalculator</PackageProjectUrl>
     <PackageIcon>djdsoft.png</PackageIcon>
@@ -19,6 +19,7 @@ Calculates the Stardate by the actual date (and vice versa).</Description>
     <RepositoryType></RepositoryType>
     <PackageTags>StarTrek Warp Stardate Star Trek</PackageTags>
     <Version>0.0.1</Version>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
