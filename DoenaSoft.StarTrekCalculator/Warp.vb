@@ -123,7 +123,7 @@ Public Module Warp
     ''' <returns>the travel time</returns>
     ''' <remarks>
     ''' An average year is calculated with 365.2425 days.
-    ''' This is based on teh leap year logic with results in 97 leap days in 400 years.
+    ''' This is based on the leap year logic with results in 97 leap days in 400 years.
     ''' </remarks>
     Public Function LightSpeedToTime(ByVal lightSpeed As Double, ByVal lightYears As Double) As TravelTime
         If lightSpeed >= MinLightSpeed Then
@@ -168,7 +168,7 @@ Public Module Warp
     ''' <param name="lightYears">the distance in light years (9,460,730,472,580,800 km)</param>
     ''' <returns>the travel time</returns>
     ''' <remarks>An average year is calculated with 365.2425 days.
-    ''' This is based on teh leap year logic with results in 97 leap days in 400 years.</remarks>
+    ''' This is based on the leap year logic with results in 97 leap days in 400 years.</remarks>
     Public Function WarpToTime(ByVal warpFactor As Double, ByVal lightYears As Double) As TravelTime
         Dim lightspeed As Double = WarpToLightSpeed(warpFactor)
 
