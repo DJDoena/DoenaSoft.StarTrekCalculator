@@ -6,7 +6,7 @@ namespace DoenaSoft.StarTrekCalculator.Tests
     /// Warp scale see official chart https://i.stack.imgur.com/ZBsFO.gif
     /// </summary>
     [TestClass]
-    public sealed class WarpToLightSpeed2
+    public sealed class WarpToLightSpeed
     {
         [TestMethod]
         public void MinWarp()
