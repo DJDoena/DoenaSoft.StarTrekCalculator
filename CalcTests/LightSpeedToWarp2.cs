@@ -3,10 +3,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace DoenaSoft.StarTrekCalculator.Tests
 {
     [TestClass]
-    public sealed class LightSpeedToWarp
+    public sealed class LightSpeedToWarp2
     {
         [TestMethod]
-        public void MinLightspeed()
+        public void MinLightSpeed()
         {
             var warp = Warp.LightSpeedToWarp(Warp.MinLightSpeed);
 
@@ -14,7 +14,7 @@ namespace DoenaSoft.StarTrekCalculator.Tests
         }
 
         [TestMethod]
-        public void MaxLightspeed()
+        public void MaxLightSpeed()
         {
             var warp = Warp.LightSpeedToWarp(Warp.MaxLightSpeed);
 
@@ -23,14 +23,14 @@ namespace DoenaSoft.StarTrekCalculator.Tests
 
         [TestMethod]
         [ExpectedException(typeof(CalculationException))]
-        public void MinLightspeedFail()
+        public void MinLightSpeedFail()
         {
             Warp.LightSpeedToWarp(0.9);
         }
 
         [TestMethod]
         [ExpectedException(typeof(CalculationException))]
-        public void MaxLightspeedFail()
+        public void MaxLightSpeedFail()
         {
             Warp.LightSpeedToWarp(Warp.MaxLightSpeed + 1);
         }
