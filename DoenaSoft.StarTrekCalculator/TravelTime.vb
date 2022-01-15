@@ -44,4 +44,14 @@ Public Structure TravelTime
         Return timeSpan
     End Function
 
+    Public Overrides Function ToString() As String
+        If Years > 0 Then
+            Return $"{Years}a {Days}d {Hours}h {Minutes}m {Seconds}s"
+        ElseIf Days > 0 Then
+            Return $"{Days}d {Hours}h {Minutes}m {Seconds}s"
+        Else
+            Return $"{Hours}h {Minutes}m {Seconds}s"
+        End If
+    End Function
+
 End Structure

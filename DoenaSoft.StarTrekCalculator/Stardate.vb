@@ -27,7 +27,7 @@ Public Module Stardate
     Public Function StardateToNormalDate(ByVal stardate As Double) As Date
 
         If stardate < MinStardate OrElse stardate > MaxStardate Then
-            Throw New CalculationException("Stardate is smaller than " & MinStardate.ToString() & " or bigger than " & MaxStardate.ToString())
+            Throw New CalculationException($"Stardate is smaller than {MinStardate} or bigger than {MaxStardate}")
         End If
 
         stardate = Math.Round(stardate, 6)

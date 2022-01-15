@@ -24,7 +24,7 @@ Public Module Warp
     ''' <param name="warpFactor">the Warp factor</param>
     ''' <returns>the multiple of light speed</returns>
     Public Function WarpToLightSpeed(ByVal warpFactor As Double) As Double
-        Return WarpToLightspeed(warpFactor, False)
+        Return WarpToLightSpeed(warpFactor, False)
     End Function
 
     ''' <summary>
@@ -89,16 +89,16 @@ Public Module Warp
             Debug.WriteLine("Starting Newton")
 
             For counter As Integer = 1 To 100
-                Debug.WriteLine("Iteration: " & counter.ToString())
-                Debug.WriteLine("Min / Max Warp: " & minWarp.ToString() & " / " & maxWarp.ToString())
+                Debug.WriteLine($"Iteration: {counter}")
+                Debug.WriteLine($"Min / Max Warp: {minWarp} / {maxWarp}")
 
                 warp = (minWarp + maxWarp) / 2
 
-                Debug.WriteLine("Warp: " & warp.ToString())
+                Debug.WriteLine($"Warp: {warp}")
 
-                Dim calculatedLightspeed As Double = WarpToLightspeed(warp, True)
+                Dim calculatedLightspeed As Double = WarpToLightSpeed(warp, True)
 
-                Debug.WriteLine("Light speed: " & calculatedLightspeed.ToString())
+                Debug.WriteLine($"Light speed: {calculatedLightspeed}")
 
                 If Math.Round(lightSpeed, 6) = calculatedLightspeed Then
                     Exit For
@@ -111,7 +111,7 @@ Public Module Warp
 
             Return Math.Round(warp, 6)
         Else
-            Throw New CalculationException("Lightspeed is smaller than " & MinLightSpeed.ToString() & " or bigger than " & MaxLightSpeed.ToString())
+            Throw New CalculationException($"Lightspeed is smaller than {MinLightSpeed} or bigger than {MaxLightSpeed}")
         End If
     End Function
 
@@ -125,7 +125,7 @@ Public Module Warp
     ''' An average year is calculated with 365.2425 days.
     ''' This is based on the leap year logic with results in 97 leap days in 400 years.
     ''' </remarks>
-    Public Function LightSpeedToTime(ByVal lightSpeed As Double, ByVal lightYears As Double) As TravelTime
+    Public Function LightSpeedToTravelTime(ByVal lightSpeed As Double, ByVal lightYears As Double) As TravelTime
         If lightSpeed >= MinLightSpeed Then
             If lightYears > 0 Then
                 Dim temp As Double = lightYears / lightSpeed
@@ -153,7 +153,7 @@ Public Module Warp
                 Throw New CalculationException("Distance is lower than 0.")
             End If
         Else
-            Throw New CalculationException("Lightspeed is lower than " & MinLightSpeed.ToString())
+            Throw New CalculationException($"Lightspeed is lower than {MinLightSpeed}")
         End If
     End Function
 
@@ -165,15 +165,15 @@ Public Module Warp
     ''' <returns>the travel time</returns>
     ''' <remarks>An average year is calculated with 365.2425 days.
     ''' This is based on the leap year logic with results in 97 leap days in 400 years.</remarks>
-    Public Function WarpToTime(ByVal warpFactor As Double, ByVal lightYears As Double) As TravelTime
+    Public Function WarpToTravelTime(ByVal warpFactor As Double, ByVal lightYears As Double) As TravelTime
         Dim lightspeed As Double = WarpToLightSpeed(warpFactor)
 
-        Dim travelTime As TravelTime = LightSpeedToTime(lightspeed, lightYears)
+        Dim travelTime As TravelTime = LightSpeedToTravelTime(lightspeed, lightYears)
 
         Return travelTime
     End Function
 
-    Private Function WarpToLightspeed(ByVal warpFactor As Double, ByVal internalCall As Boolean) As Double
+    Private Function WarpToLightSpeed(ByVal warpFactor As Double, ByVal internalCall As Boolean) As Double
         If internalCall OrElse (warpFactor >= MinWarpFactor AndAlso warpFactor <= MaxWarpFactor) Then
             Dim ln10 As Double = Math.Log(10)
 
@@ -189,7 +189,7 @@ Public Module Warp
 
             Return Math.Round(d, 6)
         Else
-            Throw New CalculationException("Warpfactor smaller than " & MinWarpFactor.ToString() & " or bigger than" & MaxWarpFactor.ToString())
+            Throw New CalculationException($"Warpfactor smaller than {MinWarpFactor} or bigger than {MaxWarpFactor}")
         End If
     End Function
 End Module
