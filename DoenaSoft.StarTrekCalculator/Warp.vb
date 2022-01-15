@@ -89,16 +89,16 @@ Public Module Warp
             Debug.WriteLine("Starting Newton")
 
             For counter As Integer = 1 To 100
-                Debug.WriteLine("Iteration: " & counter)
-                Debug.WriteLine("Min / Max Warp: " & minWarp & " / " & maxWarp)
+                Debug.WriteLine("Iteration: " & counter.ToString())
+                Debug.WriteLine("Min / Max Warp: " & minWarp.ToString() & " / " & maxWarp.ToString())
 
                 warp = (minWarp + maxWarp) / 2
 
-                Debug.WriteLine("Warp: " & warp)
+                Debug.WriteLine("Warp: " & warp.ToString())
 
                 Dim calculatedLightspeed As Double = WarpToLightspeed(warp, True)
 
-                Debug.WriteLine("Light speed: " & calculatedLightspeed)
+                Debug.WriteLine("Light speed: " & calculatedLightspeed.ToString())
 
                 If Math.Round(lightSpeed, 6) = calculatedLightspeed Then
                     Exit For
@@ -111,7 +111,7 @@ Public Module Warp
 
             Return Math.Round(warp, 6)
         Else
-            Throw New CalculationException("Lightspeed is smaller than " & MinLightSpeed & " or bigger than " & MaxLightSpeed)
+            Throw New CalculationException("Lightspeed is smaller than " & MinLightSpeed.ToString() & " or bigger than " & MaxLightSpeed.ToString())
         End If
     End Function
 
@@ -154,10 +154,10 @@ Public Module Warp
                     .Seconds = seconds
                 }
             Else
-                Throw New CalculationException("Distance is lower than " & MinLightSpeed)
+                Throw New CalculationException("Distance is lower than 0.")
             End If
         Else
-            Throw New CalculationException("Lightspeed is lower than 0.")
+            Throw New CalculationException("Lightspeed is lower than " & MinLightSpeed.ToString())
         End If
     End Function
 
@@ -193,7 +193,7 @@ Public Module Warp
 
             Return Math.Round(d, 6)
         Else
-            Throw New CalculationException("Warpfactor smaller than " & MinWarpFactor & " or bigger than" & MaxWarpFactor)
+            Throw New CalculationException("Warpfactor smaller than " & MinWarpFactor.ToString() & " or bigger than" & MaxWarpFactor.ToString())
         End If
     End Function
 End Module
