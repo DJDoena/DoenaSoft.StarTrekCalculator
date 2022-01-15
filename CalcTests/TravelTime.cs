@@ -21,7 +21,7 @@ namespace DoenaSoft.StarTrekCalculator.Tests
 
             var timeSpan = travelTime.ToTimeSpan();
 
-            Assert.AreEqual("24959.11:45:36", timeSpan.ToString());
+            Assert.AreEqual("24960.03:13:17", timeSpan.ToString());
         }
     }
 }

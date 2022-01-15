@@ -128,9 +128,11 @@ Public Module Warp
     Public Function LightSpeedToTime(ByVal lightSpeed As Double, ByVal lightYears As Double) As TravelTime
         If lightSpeed >= MinLightSpeed Then
             If lightYears > 0 Then
-                Dim years As Long = Convert.ToInt64(Truncate(lightYears / lightSpeed))
+                Dim temp As Double = lightYears / lightSpeed
 
-                Dim temp As Double = (lightYears / lightSpeed) - years
+                Dim years As Long = Convert.ToInt64(Truncate(temp))
+
+                temp -= years
 
                 Dim days As Short = Convert.ToInt16(Truncate(temp * OneYearInDays))
 
@@ -146,13 +148,7 @@ Public Module Warp
 
                 Dim seconds As Short = Convert.ToInt16(Truncate(temp * 60))
 
-                Return New TravelTime() With {
-                    .Years = years,
-                    .Days = days,
-                    .Hours = hours,
-                    .Minutes = minutes,
-                    .Seconds = seconds
-                }
+                Return New TravelTime(years, days, hours, minutes, seconds)
             Else
                 Throw New CalculationException("Distance is lower than 0.")
             End If
