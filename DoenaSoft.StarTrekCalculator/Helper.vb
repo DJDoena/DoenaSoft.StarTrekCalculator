@@ -1,9 +1,5 @@
 ﻿Friend Module Helper
-    Friend Function Fix(number As Double) As Integer
-        Return CType(Math.Truncate(number), Integer)
-    End Function
-
-    Friend Function Int(number As Double) As Integer
+    Friend Function Truncate(number As Double) As Integer
         Return CType(Math.Truncate(number), Integer)
     End Function
 End Module

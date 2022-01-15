@@ -1,68 +1,84 @@
 ﻿''' <summary>
-''' Warp scale see official chart https://i.stack.imgur.com/ZBsFO.gif
+''' This class calculates the Star Trek: The Next Generation / Deep Space Nine / Voyager warp scale.
+''' The official numbers can be seen in this chart from The Official Star Trek Fact Files: https://i.stack.imgur.com/ZBsFO.gif
 ''' </summary>
 Public Module Warp
-    Public Const MinWarp As Double = 1
+    ''' <summary />
+    Public Const MinWarpFactor As Double = 1
 
-    Public Const MaxWarp As Double = 9.999999
+    ''' <summary />
+    Public Const MaxWarpFactor As Double = 9.999999
 
-    Public Const MinLightspeed As Double = 1
+    ''' <summary />
+    Public Const MinLightSpeed As Double = 1
 
-    Public Const MaxLightspeed As Double = 500000
+    ''' <summary />
+    Public Const MaxLightSpeed As Double = 500000
 
-    Public Const OneYearInDays As Double = 365.2425
+    ''' <summary />
+    Friend Const OneYearInDays As Double = 365.2425
 
-    Public Function WarpToLightspeed(ByVal warp As Double) As Double
-        Return WarpToLightspeed(warp, False)
+    ''' <summary>
+    ''' Converts a Warp factor into a multiple of c (light speed)
+    ''' </summary>
+    ''' <param name="warpFactor">the Warp factor</param>
+    ''' <returns>the multiple of light speed</returns>
+    Public Function WarpToLightSpeed(ByVal warpFactor As Double) As Double
+        Return WarpToLightspeed(warpFactor, False)
     End Function
 
-    Public Function LightspeedToWarp(ByVal lightspeed As Double) As Double
-        If lightspeed >= MinLightspeed AndAlso lightspeed <= MaxLightspeed Then
+    ''' <summary>
+    ''' Converts a multiple of c (light speed) to a Warp factor
+    ''' </summary>
+    ''' <param name="lightSpeed">the multiple of light speed</param>
+    ''' <returns>the Warp factor</returns>
+    Public Function LightSpeedToWarp(ByVal lightSpeed As Double) As Double
+        If lightSpeed >= MinLightSpeed AndAlso lightSpeed <= MaxLightSpeed Then
             Dim minWarp As Double = 1
 
             Dim maxWarp As Double = 10
 
-            If lightspeed >= 502440 Then
+            If lightSpeed >= 502440 Then
                 minWarp = 9.999999
-            ElseIf lightspeed >= 204851 Then
+            ElseIf lightSpeed >= 204851 Then
                 minWarp = 9.99999
-            ElseIf lightspeed >= 199516 Then
+            ElseIf lightSpeed >= 199516 Then
                 minWarp = 9.9999
                 maxWarp = 9.999999
-            ElseIf lightspeed >= 10268 Then
+            ElseIf lightSpeed >= 10268 Then
                 minWarp = 9.999
                 maxWarp = 9.99999
-            ElseIf lightspeed >= 7913 Then
+            ElseIf lightSpeed >= 7913 Then
                 minWarp = 9.99
                 maxWarp = 9.9999
-            ElseIf lightspeed >= 3053 Then
+            ElseIf lightSpeed >= 3053 Then
                 minWarp = 9.9
                 maxWarp = 9.999
-            ElseIf lightspeed >= 1517 Then
+            ElseIf lightSpeed >= 1517 Then
                 minWarp = 9
                 maxWarp = 9.99
-            ElseIf lightspeed >= 1025 Then
+            ElseIf lightSpeed >= 1025 Then
                 minWarp = 8
                 maxWarp = 9.9
-            ElseIf lightspeed >= 1025 Then
+            ElseIf lightSpeed >= 1025 Then
                 minWarp = 7
                 maxWarp = 9
-            ElseIf lightspeed >= 657 Then
+            ElseIf lightSpeed >= 657 Then
                 minWarp = 6
                 maxWarp = 8
-            ElseIf lightspeed >= 393 Then
+            ElseIf lightSpeed >= 393 Then
                 minWarp = 5
                 maxWarp = 7
-            ElseIf lightspeed >= 102 Then
+            ElseIf lightSpeed >= 102 Then
                 minWarp = 4
                 maxWarp = 6
-            ElseIf lightspeed >= 39 Then
+            ElseIf lightSpeed >= 39 Then
                 minWarp = 3
                 maxWarp = 5
-            ElseIf lightspeed >= 11 Then
+            ElseIf lightSpeed >= 11 Then
                 minWarp = 2
                 maxWarp = 4
-            ElseIf lightspeed > 1 Then
+            ElseIf lightSpeed > 1 Then
                 maxWarp = 3
             Else
                 maxWarp = 1
@@ -84,49 +100,51 @@ Public Module Warp
 
                 Debug.WriteLine("Light speed: " & calculatedLightspeed)
 
-                If Math.Round(lightspeed, 6) = calculatedLightspeed Then
+                If Math.Round(lightSpeed, 6) = calculatedLightspeed Then
                     Exit For
-                ElseIf calculatedLightspeed < lightspeed Then
+                ElseIf calculatedLightspeed < lightSpeed Then
                     minWarp = warp
-                ElseIf calculatedLightspeed > lightspeed Then
+                ElseIf calculatedLightspeed > lightSpeed Then
                     maxWarp = warp
                 End If
             Next counter
 
             Return Math.Round(warp, 6)
         Else
-            Throw New CalculationException("Lightspeed is smaller than " & MinLightspeed & " or bigger than " & MaxLightspeed)
+            Throw New CalculationException("Lightspeed is smaller than " & MinLightSpeed & " or bigger than " & MaxLightSpeed)
         End If
     End Function
 
-    Public Function WarpToTime(ByVal warp As Double, ByVal distance As Double) As TravelTime
-        Dim lightspeed As Double = WarpToLightspeed(warp)
+    ''' <summary>
+    ''' Calculates the travel time based upon the given factor of light speed and distance in light years
+    ''' </summary>
+    ''' <param name="lightSpeed">the multiple of light speed</param>
+    ''' <param name="lightYears">the distance in light years (9,460,730,472,580,800 km)</param>
+    ''' <returns>the travel time</returns>
+    ''' <remarks>
+    ''' An average year is calculated with 365.2425 days.
+    ''' This is based on teh leap year logic with results in 97 leap days in 400 years.
+    ''' </remarks>
+    Public Function LightSpeedToTime(ByVal lightSpeed As Double, ByVal lightYears As Double) As TravelTime
+        If lightSpeed >= MinLightSpeed Then
+            If lightYears > 0 Then
+                Dim years As Long = Convert.ToInt64(Truncate(lightYears / lightSpeed))
 
-        Dim travelTime As TravelTime = LightspeedToTime(lightspeed, distance)
+                Dim temp As Double = (lightYears / lightSpeed) - years
 
-        Return travelTime
-    End Function
-
-    Public Function LightspeedToTime(ByVal lightspeed As Double, ByVal distance As Double) As TravelTime
-        If lightspeed >= MinLightspeed Then
-            If distance > 0 Then
-                Dim years As Long = Convert.ToInt64(Fix(distance / lightspeed))
-
-                Dim temp As Double = (distance / lightspeed) - years
-
-                Dim days As Short = Convert.ToInt16(Int(temp * OneYearInDays))
+                Dim days As Short = Convert.ToInt16(Truncate(temp * OneYearInDays))
 
                 temp = (temp * OneYearInDays) - days
 
-                Dim hours As Short = Convert.ToInt16(Int(temp * 24))
+                Dim hours As Short = Convert.ToInt16(Truncate(temp * 24))
 
                 temp = (temp * 24) - hours
 
-                Dim minutes As Short = Convert.ToInt16(Int(temp * 60))
+                Dim minutes As Short = Convert.ToInt16(Truncate(temp * 60))
 
                 temp = (temp * 60) - minutes
 
-                Dim seconds As Short = Convert.ToInt16(Int(temp * 60))
+                Dim seconds As Short = Convert.ToInt16(Truncate(temp * 60))
 
                 Return New TravelTime() With {
                     .Years = years,
@@ -136,30 +154,46 @@ Public Module Warp
                     .Seconds = seconds
                 }
             Else
-                Throw New CalculationException("Distance is lower than " & MinLightspeed)
+                Throw New CalculationException("Distance is lower than " & MinLightSpeed)
             End If
         Else
             Throw New CalculationException("Lightspeed is lower than 0.")
         End If
     End Function
 
-    Private Function WarpToLightspeed(ByVal warp As Double, ByVal internalCall As Boolean) As Double
-        If internalCall OrElse warp >= MinWarp AndAlso warp <= MaxWarp Then
+    ''' <summary>
+    ''' Calculates the travel time based upon the given Wap factor and distance in light years
+    ''' </summary>
+    ''' <param name="warpFactor">the multiple of light speed</param>
+    ''' <param name="lightYears">the distance in light years (9,460,730,472,580,800 km)</param>
+    ''' <returns>the travel time</returns>
+    ''' <remarks>An average year is calculated with 365.2425 days.
+    ''' This is based on teh leap year logic with results in 97 leap days in 400 years.</remarks>
+    Public Function WarpToTime(ByVal warpFactor As Double, ByVal lightYears As Double) As TravelTime
+        Dim lightspeed As Double = WarpToLightSpeed(warpFactor)
+
+        Dim travelTime As TravelTime = LightSpeedToTime(lightspeed, lightYears)
+
+        Return travelTime
+    End Function
+
+    Private Function WarpToLightspeed(ByVal warpFactor As Double, ByVal internalCall As Boolean) As Double
+        If internalCall OrElse (warpFactor >= MinWarpFactor AndAlso warpFactor <= MaxWarpFactor) Then
             Dim ln10 As Double = Math.Log(10)
 
-            Dim inverseWarp As Double = 10 - warp
+            Dim inverseWarp As Double = 10 - warpFactor
 
             Dim a As Double = 0.20467 * Math.Exp(-0.0058 * ((Math.Log(10000 * inverseWarp) / ln10) ^ 5))
 
             Dim b As Double = 1 + (2 * Math.Cos(10 * Math.PI * Math.Log(8 / (10 * inverseWarp)) / ln10) - 1) / 3 * Math.Exp(-49.369 * ((Math.Log(8 / (10 * inverseWarp)) / ln10) ^ 4))
 
-            Dim c As Double = 1 + 1.88269 / Math.PI * (Math.PI / 2 - Math.Atan((10 ^ warp) * Math.Log(2000 * inverseWarp) / ln10))
+            Dim c As Double = 1 + 1.88269 / Math.PI * (Math.PI / 2 - Math.Atan((10 ^ warpFactor) * Math.Log(2000 * inverseWarp) / ln10))
 
-            Dim d As Double = warp ^ (10 / 3 * (1 + (a * b * c)))
+            Dim d As Double = warpFactor ^ (10 / 3 * (1 + (a * b * c)))
 
             Return Math.Round(d, 6)
         Else
-            Throw New CalculationException("Warpfactor smaller than " & MinWarp & " or bigger than" & MaxWarp)
+            Throw New CalculationException("Warpfactor smaller than " & MinWarpFactor & " or bigger than" & MaxWarpFactor)
         End If
     End Function
 End Module
