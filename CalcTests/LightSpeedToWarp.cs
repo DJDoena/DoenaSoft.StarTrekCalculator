@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace DoenaSoft.StarTrekCalculator.Tests
 {
     [TestClass]
-    public sealed class LightSpeedToWarp2
+    public sealed class LightSpeedToWarp
     {
         [TestMethod]
         public void MinLightSpeed()
