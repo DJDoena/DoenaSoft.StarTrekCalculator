@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <RootNamespace>DoenaSoft.StarTrekCalculator</RootNamespace>
-    <TargetFrameworks>netstandard2.0;netstandard2.1;net462;net472;net48;netcoreapp2.2;netcoreapp3.1;net5.0;net6.0;</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;net35;net4;net452;net462;net472;net48;netcoreapp2.2;netcoreapp3.1;net5.0;net6.0;</TargetFrameworks>
     <OptionStrict>On</OptionStrict>
     <OptionInfer>Off</OptionInfer>
     <Authors>DJ Doena</Authors>
@@ -18,7 +18,7 @@ Calculates the Stardate by the actual date (and vice versa).</Description>
     <RepositoryUrl>https://github.com/DJDoena/DoenaSoft.StarTrekCalculator</RepositoryUrl>
     <RepositoryType></RepositoryType>
     <PackageTags>StarTrek Warp Stardate Star Trek</PackageTags>
-    <Version>1.0.10</Version>
+    <Version>1.0.11</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
   </PropertyGroup>
