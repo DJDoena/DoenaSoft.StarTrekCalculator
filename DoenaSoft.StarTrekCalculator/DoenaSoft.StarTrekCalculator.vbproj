@@ -18,8 +18,9 @@ Calculates the Stardate by the actual date (and vice versa).</Description>
     <RepositoryUrl>https://github.com/DJDoena/DoenaSoft.StarTrekCalculator</RepositoryUrl>
     <RepositoryType></RepositoryType>
     <PackageTags>StarTrek Warp Stardate Star Trek</PackageTags>
-    <Version>1.0.6</Version>
+    <Version>1.0.7</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -37,10 +38,8 @@ Calculates the Stardate by the actual date (and vice versa).</Description>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="djdsoft.png">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
+    <None Include="djdsoft.png"  Pack="true" PackagePath="\" />
+    <None Include="..\readme.md"  Pack="true" />
   </ItemGroup>
 
 </Project>
