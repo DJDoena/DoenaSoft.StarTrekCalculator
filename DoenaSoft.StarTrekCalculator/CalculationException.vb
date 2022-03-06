@@ -1,7 +1,7 @@
 ﻿Public NotInheritable Class CalculationException
-    Inherits ApplicationException
+  Inherits ApplicationException
 
-    Friend Sub New(ByVal mesage As String)
-        MyBase.New(mesage)
-    End Sub
+  Friend Sub New(ByVal mesage As String)
+    MyBase.New(mesage)
+  End Sub
 End Class
