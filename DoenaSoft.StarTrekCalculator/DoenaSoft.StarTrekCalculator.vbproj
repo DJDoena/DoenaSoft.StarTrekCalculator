@@ -8,10 +8,8 @@
 		<Authors>DJ Doena</Authors>
 		<Company>Doena Soft.</Company>
 		<Product>StarTrekCalculator</Product>
-		<Description>
-			Calculates the multiple of the speed of light by the warp factor (and vice versa).
-			Calculates the Stardate by the actual date (and vice versa).
-		</Description>
+		<Description>Calculates the multiple of the speed of light by the warp factor (and vice versa).
+Calculates the Stardate by the actual date (and vice versa).</Description>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<Copyright>2004 - 2022</Copyright>
 		<PackageProjectUrl>https://github.com/DJDoena/DoenaSoft.StarTrekCalculator</PackageProjectUrl>
