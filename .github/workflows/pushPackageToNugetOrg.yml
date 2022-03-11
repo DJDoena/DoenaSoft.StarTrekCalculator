@@ -1,11 +1,6 @@
 #In this script it is important to set the RepositoryUrl in the *.csproj file
-#<PropertyGroup>
-#  ...
-#  <PackageProjectUrl>https://github.com/michaelroth1/homeNet.Components</PackageProjectUrl>
-#  <RepositoryUrl>https://github.com/michaelroth1/homeNet.Components</RepositoryUrl>
-#</PropertyGroup>
 
-name: NuGet Generation
+name: NuGet Generation for DoenaSoft
 
 on:
   push:
