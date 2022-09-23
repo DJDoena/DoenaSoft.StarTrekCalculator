@@ -30,7 +30,7 @@ jobs:
           NUGET_AUTH_TOKEN: ${{secrets.NUGET_API_KEY}}        
           
       - name: Build solution and generate NuGet package
-        run: dotnet build ${{ env.PROJECT_FOLDER }}/${{ env.PROJECT_FILE }} -c Release -f net472 /p:Platform=x64
+        run: dotnet build ${{ env.PROJECT_FOLDER }}/${{ env.PROJECT_FILE }} -c Release     
           
       - name: Push generated package to Nuget.org
         run: dotnet nuget push ./${{env.PROJECT_FOLDER}}/bin/Release/*.nupkg --api-key ${{secrets.NUGET_API_KEY}} --source "${{env.SOURCE_URL}}" --skip-duplicate --no-symbols
