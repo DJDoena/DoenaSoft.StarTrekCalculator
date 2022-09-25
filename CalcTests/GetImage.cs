@@ -9,7 +9,7 @@ namespace DoenaSoft.StarTrekCalculator.Tests
         [TestMethod]
         public void Warpchart()
         {
-            using (var image = Images.GetWarpChart())
+            using (var image = Images.GetWarpChartJpeg())
             {
                 var fileName = Path.Combine(Path.GetTempPath(), "warpchart.jpg");
 
