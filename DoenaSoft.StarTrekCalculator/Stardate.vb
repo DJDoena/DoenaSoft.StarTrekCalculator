@@ -4,7 +4,7 @@
 ''' <remarks>
 ''' The TNG / DS9 / VOY system was invented to bring some kind of system to the random numbers of The Original Series.
 ''' The numbers started in the first season of Star Trek TNG with 41xyz which was meant as 4 = 24th century, 1 = first season.
-''' Subsequently each season increaes the second digit and the 3rd to 5th digit increase over the course of the season.
+''' Subsequently each season increases the second digit and the 3rd to 5th digit increase over the course of the season.
 ''' Since each season is one year in the real world, this calculator assumes that 1000 stardates equal one Earth year.
 ''' Based on the fact that the show starts in 2364, the baseline for the new stardate system is the year 2323.
 ''' </remarks>
