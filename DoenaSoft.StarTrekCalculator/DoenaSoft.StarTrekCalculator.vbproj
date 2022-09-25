@@ -1,8 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<RootNamespace>DoenaSoft.StarTrekCalculator</RootNamespace>
-		<TargetFrameworks>netstandard1.3;netstandard2.0;netstandard2.1;net20;net35;net4;net45;net452;net46;net462;net47;net472;net48;netcoreapp2.2;netcoreapp3.1;net5.0;net6.0;</TargetFrameworks>
+		<TargetFrameworks>netstandard2.0;netstandard2.1;net20;net35;net4;net45;net452;net46;net462;net47;net472;net48;netcoreapp2.2;netcoreapp3.1;net5.0;net6.0;</TargetFrameworks>
 		<OptionStrict>On</OptionStrict>
 		<OptionInfer>Off</OptionInfer>
 		<Authors>DJ Doena</Authors>
@@ -22,7 +22,7 @@ Calculates the Stardate by the actual date (and vice versa).</Description>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageReadmeFile>readme.md</PackageReadmeFile>
 		<AssemblyVersion>1.0.16.0</AssemblyVersion>
-		<FileVersion>1.0.16.0</FileVersion>
+		<FileVersion>1.0.17.0</FileVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -38,6 +38,14 @@ Calculates the Stardate by the actual date (and vice versa).</Description>
 		<DocumentationFile>DoenaSoft.StarTrekCalculator.xml</DocumentationFile>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Remove="warpchart.jpg" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="warpchart.jpg" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<None Include="djdsoft.png" Pack="true" PackagePath="\" />

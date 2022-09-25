@@ -6,6 +6,8 @@
     <IsPackable>false</IsPackable>
 
     <OutputType>Library</OutputType>
+
+    <RootNamespace>DoenaSoft.StarTrekCalculator.Tests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
