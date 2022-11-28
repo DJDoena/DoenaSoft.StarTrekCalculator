@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<RootNamespace>DoenaSoft.StarTrekCalculator</RootNamespace>
-		<TargetFrameworks>netstandard2.0;netstandard2.1;net20;net35;net4;net45;net452;net46;net462;net47;net472;net48;netcoreapp2.2;netcoreapp3.1;net5.0;net6.0;</TargetFrameworks>
+		<TargetFrameworks>netstandard2.1;net35;net452;net472;net48;net5.0;net6.0;net7.0;</TargetFrameworks>
 		<OptionStrict>On</OptionStrict>
 		<OptionInfer>Off</OptionInfer>
 		<Authors>DJ Doena</Authors>
@@ -18,25 +18,12 @@ Calculates the Stardate by the actual date (and vice versa).</Description>
 		<RepositoryUrl>https://github.com/DJDoena/DoenaSoft.StarTrekCalculator</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>StarTrek;Star-Trek;Warp;Stardate</PackageTags>
-		<Version>1.0.19</Version>
+		<Version>1.0.20</Version>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageReadmeFile>readme.md</PackageReadmeFile>
-		<AssemblyVersion>1.0.19.0</AssemblyVersion>
-		<FileVersion>1.0.19.0</FileVersion>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-		<NoWarn></NoWarn>
-		<WarningsAsErrors>41998,41999,42004,42016,42017,42018,42019,42020,42021,42022,42024,42025,42026,42029,42030,42031,42032,42036,42099,42104,42105,42106,42107,42108,42109,42353,42354,42355</WarningsAsErrors>
 		<DocumentationFile>DoenaSoft.StarTrekCalculator.xml</DocumentationFile>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-		<NoWarn></NoWarn>
 		<WarningsAsErrors>41998,41999,42004,42016,42017,42018,42019,42020,42021,42022,42024,42025,42026,42029,42030,42031,42032,42036,42099,42104,42105,42106,42107,42108,42109,42353,42354,42355</WarningsAsErrors>
-		<DocumentationFile>DoenaSoft.StarTrekCalculator.xml</DocumentationFile>
-		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 	</PropertyGroup>
 
 	<ItemGroup>
