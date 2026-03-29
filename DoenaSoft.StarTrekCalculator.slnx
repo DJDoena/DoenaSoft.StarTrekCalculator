@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="CalcTests/CalcTests.csproj" />
+  <Project Path="DoenaSoft.StarTrekCalculator/DoenaSoft.StarTrekCalculator.vbproj" />
+</Solution>
