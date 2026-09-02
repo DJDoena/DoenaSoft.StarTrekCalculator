@@ -3,21 +3,39 @@
 ''' Warp scale see <a href="https://i.stack.imgur.com/ZBsFO.gif">The Official Star Trek Fact Files</a>.
 ''' </summary>
 Public Structure TravelTime
-    ''' <summary />
+    ''' <summary>
+    ''' The whole years of the travel time.
+    ''' </summary>
     Public ReadOnly Property Years As Long
 
-    ''' <summary />
+    ''' <summary>
+    ''' The remaining whole days of the travel time, after the years are subtracted.
+    ''' </summary>
     Public ReadOnly Property Days As Short
 
-    ''' <summary />
+    ''' <summary>
+    ''' The remaining whole hours of the travel time, after the years and days are subtracted.
+    ''' </summary>
     Public ReadOnly Property Hours As Short
 
-    ''' <summary />
+    ''' <summary>
+    ''' The remaining whole minutes of the travel time, after the years, days and hours are subtracted.
+    ''' </summary>
     Public ReadOnly Property Minutes As Short
 
-    ''' <summary />
+    ''' <summary>
+    ''' The remaining whole seconds of the travel time, after the years, days, hours and minutes are subtracted.
+    ''' </summary>
     Public ReadOnly Property Seconds As Short
 
+    ''' <summary>
+    ''' Initializes a new instance of the <see cref="TravelTime"/> structure.
+    ''' </summary>
+    ''' <param name="years">the whole years of the travel time</param>
+    ''' <param name="days">the remaining whole days of the travel time</param>
+    ''' <param name="hours">the remaining whole hours of the travel time</param>
+    ''' <param name="minutes">the remaining whole minutes of the travel time</param>
+    ''' <param name="seconds">the remaining whole seconds of the travel time</param>
     Friend Sub New(ByVal years As Long, ByVal days As Short, ByVal hours As Short, ByVal minutes As Short, ByVal seconds As Short)
         Me.Years = years
         Me.Days = days
