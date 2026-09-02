@@ -46,9 +46,11 @@ Public Module Stardate
 
     normalDate = normalDate.AddYears(myYear - 1)
 
-    normalDate = normalDate.AddDays(temp)
+        Dim ticks As Long = CLng(Math.Round(temp * TimeSpan.TicksPerDay))
 
-    Return normalDate
+        normalDate = normalDate.AddTicks(ticks)
+
+        Return normalDate
   End Function
 
   ''' <summary>

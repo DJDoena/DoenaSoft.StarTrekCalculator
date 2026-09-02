@@ -3,11 +3,11 @@
 ''' The official numbers can be seen in this chart from <a href="https://i.stack.imgur.com/ZBsFO.gif">The Official Star Trek Fact Files</a>.
 ''' </summary>
 Public Module Warp
-  ''' <summary />
-  Public Const MinWarpFactor As Double = 1
+    ''' <summary />
+    Public Const MinWarpFactor As Double = 1
 
-  ''' <summary />
-  Public Const MaxWarpFactor As Double = 9.999999
+    ''' <summary />
+    Public Const MaxWarpFactor As Double = 9.999999
 
   ''' <summary />
   Public Const MinLightSpeed As Double = 1
@@ -174,21 +174,28 @@ Public Module Warp
   End Function
 
   Private Function WarpToLightSpeed(ByVal warpFactor As Double, ByVal internalCall As Boolean) As Double
-    If internalCall OrElse (warpFactor >= MinWarpFactor AndAlso warpFactor <= MaxWarpFactor) Then
-      Dim ln10 As Double = Math.Log(10)
+        ' internal (recursive) calls from LightSpeedToWarp's Newton approximation are allowed to
+        ' pass warp factors outside the public min/max range while the search interval converges.
+        If internalCall OrElse (warpFactor >= MinWarpFactor AndAlso warpFactor <= MaxWarpFactor) Then
+            Dim ln10 As Double = Math.Log(10)
 
-      Dim inverseWarp As Double = 10 - warpFactor
+            ' distance (in warp factors) from the theoretical Warp 10 asymptote
+            Dim inverseWarp As Double = 10 - warpFactor
 
-      Dim a As Double = 0.20467 * Math.Exp(-0.0058 * ((Math.Log(10000 * inverseWarp) / ln10) ^ 5))
+            ' dampens the correction curve for low warp factors (barely affects results near Warp 10)
+            Dim dampingFactor As Double = 0.20467 * Math.Exp(-0.0058 * ((Math.Log(10000 * inverseWarp) / ln10) ^ 5))
 
-      Dim b As Double = 1 + (2 * Math.Cos(10 * Math.PI * Math.Log(8 / (10 * inverseWarp)) / ln10) - 1) / 3 * Math.Exp(-49.369 * ((Math.Log(8 / (10 * inverseWarp)) / ln10) ^ 4))
+            ' introduces the wave-like ripple seen in the official TNG warp chart around Warp 9.99+
+            Dim rippleFactor As Double = 1 + (2 * Math.Cos(10 * Math.PI * Math.Log(8 / (10 * inverseWarp)) / ln10) - 1) / 3 * Math.Exp(-49.369 * ((Math.Log(8 / (10 * inverseWarp)) / ln10) ^ 4))
 
-      Dim c As Double = 1 + 1.88269 / Math.PI * (Math.PI / 2 - Math.Atan((10 ^ warpFactor) * Math.Log(2000 * inverseWarp) / ln10))
+            ' steepens the curve as warpFactor approaches the Warp 10 asymptote (approaches infinite speed)
+            Dim asymptoteFactor As Double = 1 + 1.88269 / Math.PI * (Math.PI / 2 - Math.Atan((10 ^ warpFactor) * Math.Log(2000 * inverseWarp) / ln10))
 
-      Dim d As Double = warpFactor ^ (10 / 3 * (1 + (a * b * c)))
+            ' combined exponent applied to the warp factor to yield the multiple of light speed
+            Dim exponent As Double = warpFactor ^ (10 / 3 * (1 + (dampingFactor * rippleFactor * asymptoteFactor)))
 
-      Return Math.Round(d, 6)
-    Else
+            Return Math.Round(exponent, 6)
+        Else
       Throw New CalculationException($"Warpfactor smaller than {MinWarpFactor} or bigger than {MaxWarpFactor}")
     End If
   End Function
