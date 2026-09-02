@@ -9,171 +9,171 @@ Public Module Warp
     ''' <summary />
     Public Const MaxWarpFactor As Double = 9.999999
 
-  ''' <summary />
-  Public Const MinLightSpeed As Double = 1
+    ''' <summary />
+    Public Const MinLightSpeed As Double = 1
 
-  ''' <summary />
-  Public Const MaxLightSpeed As Double = 500000
+    ''' <summary />
+    Public Const MaxLightSpeed As Double = 500000
 
-  ''' <summary />
-  Friend Const OneYearInDays As Double = 365.2425
+    ''' <summary />
+    Friend Const OneYearInDays As Double = 365.2425
 
-  ''' <summary>
-  ''' Converts a Warp factor into a multiple of c (light speed)
-  ''' </summary>
-  ''' <param name="warpFactor">the Warp factor</param>
-  ''' <returns>the multiple of light speed</returns>
-  Public Function WarpToLightSpeed(ByVal warpFactor As Double) As Double
-    Return WarpToLightSpeed(warpFactor, False)
-  End Function
+    ''' <summary>
+    ''' Converts a Warp factor into a multiple of c (light speed)
+    ''' </summary>
+    ''' <param name="warpFactor">the Warp factor</param>
+    ''' <returns>the multiple of light speed</returns>
+    Public Function WarpToLightSpeed(ByVal warpFactor As Double) As Double
+        Return WarpToLightSpeed(warpFactor, False)
+    End Function
 
-  ''' <summary>
-  ''' Converts a multiple of c (light speed) to a Warp factor
-  ''' </summary>
-  ''' <param name="lightSpeed">the multiple of light speed</param>
-  ''' <returns>the Warp factor</returns>
-  Public Function LightSpeedToWarp(ByVal lightSpeed As Double) As Double
-    If lightSpeed >= MinLightSpeed AndAlso lightSpeed <= MaxLightSpeed Then
-      Dim minWarp As Double = 1
+    ''' <summary>
+    ''' Converts a multiple of c (light speed) to a Warp factor
+    ''' </summary>
+    ''' <param name="lightSpeed">the multiple of light speed</param>
+    ''' <returns>the Warp factor</returns>
+    Public Function LightSpeedToWarp(ByVal lightSpeed As Double) As Double
+        If lightSpeed >= MinLightSpeed AndAlso lightSpeed <= MaxLightSpeed Then
+            Dim minWarp As Double = 1
 
-      Dim maxWarp As Double = 10
+            Dim maxWarp As Double = 10
 
-      If lightSpeed >= 502440 Then
-        minWarp = 9.999999
-      ElseIf lightSpeed >= 204851 Then
-        minWarp = 9.99999
-      ElseIf lightSpeed >= 199516 Then
-        minWarp = 9.9999
-        maxWarp = 9.999999
-      ElseIf lightSpeed >= 10268 Then
-        minWarp = 9.999
-        maxWarp = 9.99999
-      ElseIf lightSpeed >= 7913 Then
-        minWarp = 9.99
-        maxWarp = 9.9999
-      ElseIf lightSpeed >= 3053 Then
-        minWarp = 9.9
-        maxWarp = 9.999
-      ElseIf lightSpeed >= 1517 Then
-        minWarp = 9
-        maxWarp = 9.99
-      ElseIf lightSpeed >= 1025 Then
-        minWarp = 8
-        maxWarp = 9.9
-      ElseIf lightSpeed >= 1025 Then
-        minWarp = 7
-        maxWarp = 9
-      ElseIf lightSpeed >= 657 Then
-        minWarp = 6
-        maxWarp = 8
-      ElseIf lightSpeed >= 393 Then
-        minWarp = 5
-        maxWarp = 7
-      ElseIf lightSpeed >= 102 Then
-        minWarp = 4
-        maxWarp = 6
-      ElseIf lightSpeed >= 39 Then
-        minWarp = 3
-        maxWarp = 5
-      ElseIf lightSpeed >= 11 Then
-        minWarp = 2
-        maxWarp = 4
-      ElseIf lightSpeed > 1 Then
-        maxWarp = 3
-      Else
-        maxWarp = 1
-      End If
+            If lightSpeed >= 502440 Then
+                minWarp = 9.999999
+            ElseIf lightSpeed >= 204851 Then
+                minWarp = 9.99999
+            ElseIf lightSpeed >= 199516 Then
+                minWarp = 9.9999
+                maxWarp = 9.999999
+            ElseIf lightSpeed >= 10268 Then
+                minWarp = 9.999
+                maxWarp = 9.99999
+            ElseIf lightSpeed >= 7913 Then
+                minWarp = 9.99
+                maxWarp = 9.9999
+            ElseIf lightSpeed >= 3053 Then
+                minWarp = 9.9
+                maxWarp = 9.999
+            ElseIf lightSpeed >= 1517 Then
+                minWarp = 9
+                maxWarp = 9.99
+            ElseIf lightSpeed >= 1025 Then
+                minWarp = 8
+                maxWarp = 9.9
+            ElseIf lightSpeed >= 1025 Then
+                minWarp = 7
+                maxWarp = 9
+            ElseIf lightSpeed >= 657 Then
+                minWarp = 6
+                maxWarp = 8
+            ElseIf lightSpeed >= 393 Then
+                minWarp = 5
+                maxWarp = 7
+            ElseIf lightSpeed >= 102 Then
+                minWarp = 4
+                maxWarp = 6
+            ElseIf lightSpeed >= 39 Then
+                minWarp = 3
+                maxWarp = 5
+            ElseIf lightSpeed >= 11 Then
+                minWarp = 2
+                maxWarp = 4
+            ElseIf lightSpeed > 1 Then
+                maxWarp = 3
+            Else
+                maxWarp = 1
+            End If
 
-      Dim warp As Double = 1
+            Dim warp As Double = 1
 
-      Debug.WriteLine("Starting Newton")
+            Debug.WriteLine("Starting Newton")
 
-      For counter As Integer = 1 To 100
-        Debug.WriteLine($"Iteration: {counter}")
-        Debug.WriteLine($"Min / Max Warp: {minWarp} / {maxWarp}")
+            For counter As Integer = 1 To 100
+                Debug.WriteLine($"Iteration: {counter}")
+                Debug.WriteLine($"Min / Max Warp: {minWarp} / {maxWarp}")
 
-        warp = (minWarp + maxWarp) / 2
+                warp = (minWarp + maxWarp) / 2
 
-        Debug.WriteLine($"Warp: {warp}")
+                Debug.WriteLine($"Warp: {warp}")
 
-        Dim calculatedLightspeed As Double = WarpToLightSpeed(warp, True)
+                Dim calculatedLightspeed As Double = WarpToLightSpeed(warp, True)
 
-        Debug.WriteLine($"Light speed: {calculatedLightspeed}")
+                Debug.WriteLine($"Light speed: {calculatedLightspeed}")
 
-        If Math.Round(lightSpeed, 6) = calculatedLightspeed Then
-          Exit For
-        ElseIf calculatedLightspeed < lightSpeed Then
-          minWarp = warp
-        ElseIf calculatedLightspeed > lightSpeed Then
-          maxWarp = warp
+                If Math.Round(lightSpeed, 6) = calculatedLightspeed Then
+                    Exit For
+                ElseIf calculatedLightspeed < lightSpeed Then
+                    minWarp = warp
+                ElseIf calculatedLightspeed > lightSpeed Then
+                    maxWarp = warp
+                End If
+            Next counter
+
+            Return Math.Round(warp, 6)
+        Else
+            Throw New CalculationException($"Lightspeed is smaller than {MinLightSpeed} or bigger than {MaxLightSpeed}")
         End If
-      Next counter
+    End Function
 
-      Return Math.Round(warp, 6)
-    Else
-      Throw New CalculationException($"Lightspeed is smaller than {MinLightSpeed} or bigger than {MaxLightSpeed}")
-    End If
-  End Function
+    ''' <summary>
+    ''' Calculates the travel time based upon the given factor of light speed and distance in light years
+    ''' </summary>
+    ''' <param name="lightSpeed">the multiple of light speed</param>
+    ''' <param name="lightYears">the distance in light years (9,460,730,472,580,800 km)</param>
+    ''' <returns>the travel time</returns>
+    ''' <remarks>
+    ''' An average year is calculated with 365.2425 days.
+    ''' This is based on the leap year logic wich results in 97 leap days in 400 years.
+    ''' </remarks>
+    Public Function LightSpeedToTravelTime(ByVal lightSpeed As Double, ByVal lightYears As Double) As TravelTime
+        If lightSpeed >= MinLightSpeed Then
+            If lightYears > 0 Then
+                Dim temp As Double = lightYears / lightSpeed
 
-  ''' <summary>
-  ''' Calculates the travel time based upon the given factor of light speed and distance in light years
-  ''' </summary>
-  ''' <param name="lightSpeed">the multiple of light speed</param>
-  ''' <param name="lightYears">the distance in light years (9,460,730,472,580,800 km)</param>
-  ''' <returns>the travel time</returns>
-  ''' <remarks>
-  ''' An average year is calculated with 365.2425 days.
-  ''' This is based on the leap year logic wich results in 97 leap days in 400 years.
-  ''' </remarks>
-  Public Function LightSpeedToTravelTime(ByVal lightSpeed As Double, ByVal lightYears As Double) As TravelTime
-    If lightSpeed >= MinLightSpeed Then
-      If lightYears > 0 Then
-        Dim temp As Double = lightYears / lightSpeed
+                Dim years As Long = Convert.ToInt64(Truncate(temp))
 
-        Dim years As Long = Convert.ToInt64(Truncate(temp))
+                temp -= years
 
-        temp -= years
+                Dim days As Short = Convert.ToInt16(Truncate(temp * OneYearInDays))
 
-        Dim days As Short = Convert.ToInt16(Truncate(temp * OneYearInDays))
+                temp = (temp * OneYearInDays) - days
 
-        temp = (temp * OneYearInDays) - days
+                Dim hours As Short = Convert.ToInt16(Truncate(temp * 24))
 
-        Dim hours As Short = Convert.ToInt16(Truncate(temp * 24))
+                temp = (temp * 24) - hours
 
-        temp = (temp * 24) - hours
+                Dim minutes As Short = Convert.ToInt16(Truncate(temp * 60))
 
-        Dim minutes As Short = Convert.ToInt16(Truncate(temp * 60))
+                temp = (temp * 60) - minutes
 
-        temp = (temp * 60) - minutes
+                Dim seconds As Short = Convert.ToInt16(Truncate(temp * 60))
 
-        Dim seconds As Short = Convert.ToInt16(Truncate(temp * 60))
+                Return New TravelTime(years, days, hours, minutes, seconds)
+            Else
+                Throw New CalculationException("Distance is lower than 0.")
+            End If
+        Else
+            Throw New CalculationException($"Lightspeed is lower than {MinLightSpeed}")
+        End If
+    End Function
 
-        Return New TravelTime(years, days, hours, minutes, seconds)
-      Else
-        Throw New CalculationException("Distance is lower than 0.")
-      End If
-    Else
-      Throw New CalculationException($"Lightspeed is lower than {MinLightSpeed}")
-    End If
-  End Function
+    ''' <summary>
+    ''' Calculates the travel time based upon the given Wap factor and distance in light years
+    ''' </summary>
+    ''' <param name="warpFactor">the multiple of light speed</param>
+    ''' <param name="lightYears">the distance in light years (9,460,730,472,580,800 km)</param>
+    ''' <returns>the travel time</returns>
+    ''' <remarks>An average year is calculated with 365.2425 days.
+    ''' This is based on the leap year logic with results in 97 leap days in 400 years.</remarks>
+    Public Function WarpToTravelTime(ByVal warpFactor As Double, ByVal lightYears As Double) As TravelTime
+        Dim lightspeed As Double = WarpToLightSpeed(warpFactor)
 
-  ''' <summary>
-  ''' Calculates the travel time based upon the given Wap factor and distance in light years
-  ''' </summary>
-  ''' <param name="warpFactor">the multiple of light speed</param>
-  ''' <param name="lightYears">the distance in light years (9,460,730,472,580,800 km)</param>
-  ''' <returns>the travel time</returns>
-  ''' <remarks>An average year is calculated with 365.2425 days.
-  ''' This is based on the leap year logic with results in 97 leap days in 400 years.</remarks>
-  Public Function WarpToTravelTime(ByVal warpFactor As Double, ByVal lightYears As Double) As TravelTime
-    Dim lightspeed As Double = WarpToLightSpeed(warpFactor)
+        Dim travelTime As TravelTime = LightSpeedToTravelTime(lightspeed, lightYears)
 
-    Dim travelTime As TravelTime = LightSpeedToTravelTime(lightspeed, lightYears)
+        Return travelTime
+    End Function
 
-    Return travelTime
-  End Function
-
-  Private Function WarpToLightSpeed(ByVal warpFactor As Double, ByVal internalCall As Boolean) As Double
+    Private Function WarpToLightSpeed(ByVal warpFactor As Double, ByVal internalCall As Boolean) As Double
         ' internal (recursive) calls from LightSpeedToWarp's Newton approximation are allowed to
         ' pass warp factors outside the public min/max range while the search interval converges.
         If internalCall OrElse (warpFactor >= MinWarpFactor AndAlso warpFactor <= MaxWarpFactor) Then
@@ -196,7 +196,7 @@ Public Module Warp
 
             Return Math.Round(exponent, 6)
         Else
-      Throw New CalculationException($"Warpfactor smaller than {MinWarpFactor} or bigger than {MaxWarpFactor}")
-    End If
-  End Function
+            Throw New CalculationException($"Warpfactor smaller than {MinWarpFactor} or bigger than {MaxWarpFactor}")
+        End If
+    End Function
 End Module
