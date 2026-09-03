@@ -133,6 +133,28 @@ function pad2(number)
     return String(number).padStart(2, "0");
 }
 
+// Parses a decimal number from user input, honoring the German convention of using a
+// comma instead of a dot as the decimal separator.
+function parseLocaleFloat(text, languageCode)
+{
+    let normalized = languageCode === "de"
+        ? text.replace(",", ".")
+        : text;
+
+    return parseFloat(normalized);
+}
+
+// Formats a decimal number for display, honoring the German convention of using a
+// comma instead of a dot as the decimal separator.
+function formatLocaleNumber(number, languageCode)
+{
+    let text = String(number);
+
+    return languageCode === "de"
+        ? text.replace(".", ",")
+        : text;
+}
+
 // Writes a UTC-based Date into the year/month/day/hour/minute/second input fields for a date
 // section (identified by idPrefix). Month/day/hour/minute/second are zero-padded to two digits.
 function writeDateInputs(idPrefix, date)
@@ -155,11 +177,11 @@ function calculateWarpToLightSpeed(languageCode)
 {
     try
     {
-        let warpFactor = parseFloat(getById("warpFactorInput").value);
+        let warpFactor = parseLocaleFloat(getById("warpFactorInput").value, languageCode);
 
         let lightSpeed = warpToLightSpeed(warpFactor);
 
-        let text = formatTranslation(getTranslations(languageCode).lightSpeedResult, [lightSpeed]);
+        let text = formatTranslation(getTranslations(languageCode).lightSpeedResult, [formatLocaleNumber(lightSpeed, languageCode)]);
 
         showResult("warpToLightSpeedOutput", text, false);
     }
@@ -174,11 +196,11 @@ function calculateLightSpeedToWarp(languageCode)
 {
     try
     {
-        let lightSpeed = parseFloat(getById("lightSpeedInput").value);
+        let lightSpeed = parseLocaleFloat(getById("lightSpeedInput").value, languageCode);
 
         let warpFactor = lightSpeedToWarp(lightSpeed);
 
-        let text = formatTranslation(getTranslations(languageCode).warpResult, [warpFactor]);
+        let text = formatTranslation(getTranslations(languageCode).warpResult, [formatLocaleNumber(warpFactor, languageCode)]);
 
         showResult("lightSpeedToWarpOutput", text, false);
     }
@@ -193,7 +215,7 @@ function calculateTravelTime(languageCode)
 {
     try
     {
-        let lightYears = parseFloat(getById("travelTimeLightYearsInput").value);
+        let lightYears = parseLocaleFloat(getById("travelTimeLightYearsInput").value, languageCode);
 
         let useWarp = getById("travelTimeUseWarp").checked;
 
@@ -201,13 +223,13 @@ function calculateTravelTime(languageCode)
 
         if(useWarp)
         {
-            let warpFactor = parseFloat(getById("travelTimeWarpInput").value);
+            let warpFactor = parseLocaleFloat(getById("travelTimeWarpInput").value, languageCode);
 
             travelTime = warpToTravelTime(warpFactor, lightYears);
         }
         else
         {
-            let lightSpeed = parseFloat(getById("travelTimeLightSpeedInput").value);
+            let lightSpeed = parseLocaleFloat(getById("travelTimeLightSpeedInput").value, languageCode);
 
             travelTime = lightSpeedToTravelTime(lightSpeed, lightYears);
         }
@@ -225,7 +247,7 @@ function calculateStardateToNormalDate(languageCode)
 {
     try
     {
-        let stardate = parseFloat(getById("stardateInput").value);
+        let stardate = parseLocaleFloat(getById("stardateInput").value, languageCode);
 
         let normalDate = stardateToNormalDate(stardate);
 
@@ -250,7 +272,7 @@ function calculateNormalDateToStardate(languageCode)
 
         let stardate = normalDateToStardate(normalDate);
 
-        showResult("normalDateToStardateOutput", stardate.toString(), false);
+        showResult("normalDateToStardateOutput", formatLocaleNumber(stardate, languageCode), false);
     }
     catch(error)
     {

@@ -41,7 +41,7 @@
             <table>
                 <tr>
                     <td>Warp factor (1 - 9.999999):</td>
-                    <td><input type="number" id="warpFactorInput" min="1" max="9.999999" step="any" value="9" /></td>
+                    <td><input type="text" inputmode="decimal" id="warpFactorInput" value="9" /></td>
                 </tr>
                 <tr>
                     <td><input type="button" value="Calculate" onClick="calculateWarpToLightSpeed('en');" /></td>
@@ -55,7 +55,7 @@
             <table>
                 <tr>
                     <td>Multiple of light speed (1 - 500000):</td>
-                    <td><input type="number" id="lightSpeedInput" class="input-wide" min="1" max="500000" step="any" value="1516" /></td>
+                    <td><input type="text" inputmode="decimal" id="lightSpeedInput" class="input-wide" value="1516" /></td>
                 </tr>
                 <tr>
                     <td><input type="button" value="Calculate" onClick="calculateLightSpeedToWarp('en');" /></td>
@@ -73,15 +73,15 @@
                 </tr>
                 <tr>
                     <td>Warp factor (1 - 9.999999):</td>
-                    <td><input type="number" id="travelTimeWarpInput" class="input-wide" min="1" max="9.999999" step="any" value="9" /></td>
+                    <td><input type="text" inputmode="decimal" id="travelTimeWarpInput" class="input-wide" value="9" /></td>
                 </tr>
                 <tr>
                     <td>Multiple of light speed (1 - 500000):</td>
-                    <td><input type="number" id="travelTimeLightSpeedInput" class="input-wide" min="1" max="500000" step="any" value="1516" disabled /></td>
+                    <td><input type="text" inputmode="decimal" id="travelTimeLightSpeedInput" class="input-wide" value="1516" disabled /></td>
                 </tr>
                 <tr>
                     <td>Distance (light years):</td>
-                    <td><input type="number" id="travelTimeLightYearsInput" class="input-wide" min="0" step="any" value="4.243" /></td>
+                    <td><input type="text" inputmode="decimal" id="travelTimeLightYearsInput" class="input-wide" value="4.243" /></td>
                 </tr>
                 <tr>
                     <td><input type="button" value="Calculate" onClick="calculateTravelTime('en');" /></td>
@@ -95,7 +95,7 @@
             <table>
                 <tr>
                     <td>Stardate (-2322000 - 7676999.999999):</td>
-                    <td><input type="number" id="stardateInput" class="input-xwide" min="-2322000" max="7676999.999999" step="any" value="41153.7" /></td>
+                    <td><input type="text" inputmode="decimal" id="stardateInput" class="input-xwide" value="41153.7" /></td>
                 </tr>
                 <tr>
                     <td><input type="button" value="Calculate" onClick="calculateStardateToNormalDate('en');" /></td>
