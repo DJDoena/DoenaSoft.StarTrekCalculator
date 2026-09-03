@@ -1,4 +1,10 @@
 <Solution>
+  <Folder Name="/Web/">
+    <File Path="Web/index.html" />
+    <File Path="Web/StarTrekCalculator.js" />
+    <File Path="Web/StarTrekCalculatorSolver.js" />
+    <File Path="Web/verify-solver.js" />
+  </Folder>
   <Project Path="CalcTests/CalcTests.csproj" />
   <Project Path="DoenaSoft.StarTrekCalculator/DoenaSoft.StarTrekCalculator.vbproj" />
 </Solution>

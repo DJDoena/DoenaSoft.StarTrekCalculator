@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <title>Star Trek Calculator</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width; initial-scale=1" />
+        <script src="StarTrekCalculatorSolver.js"></script>
+        <script src="StarTrekCalculator.js"></script>
+        <style>
+            table td, table th
+            {
+                padding: 4px 15px;
+            }
+        </style>
+    </head>
+    <body style="font-family: Verdana, Geneva, sans-serif;" onload="toggleTravelTimeInputMode();">
+        <h1>Star Trek Calculator</h1>
+
+        <h2>Warp Factor &rarr; Light Speed</h2>
+        <form>
+            <table>
+                <tr>
+                    <td>Warp factor (1 - 9.999999):</td>
+                    <td><input type="number" id="warpFactorInput" min="1" max="9.999999" step="any" value="9" /></td>
+                </tr>
+                <tr>
+                    <td><input type="button" value="Calculate" onClick="calculateWarpToLightSpeed();" /></td>
+                    <td id="warpToLightSpeedOutput"></td>
+                </tr>
+            </table>
+        </form>
+
+        <h2>Light Speed &rarr; Warp Factor</h2>
+        <form>
+            <table>
+                <tr>
+                    <td>Multiple of light speed (1 - 500000):</td>
+                    <td><input type="number" id="lightSpeedInput" min="1" max="500000" step="any" value="1516" /></td>
+                </tr>
+                <tr>
+                    <td><input type="button" value="Calculate" onClick="calculateLightSpeedToWarp();" /></td>
+                    <td id="lightSpeedToWarpOutput"></td>
+                </tr>
+            </table>
+        </form>
+
+        <h2>Travel Time</h2>
+        <form>
+            <table>
+                <tr>
+                    <td><input type="checkbox" id="travelTimeUseWarp" checked onClick="toggleTravelTimeInputMode();" /> Use Warp factor instead of light speed multiple</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Warp factor (1 - 9.999999):</td>
+                    <td><input type="number" id="travelTimeWarpInput" min="1" max="9.999999" step="any" value="9" /></td>
+                </tr>
+                <tr>
+                    <td>Multiple of light speed (1 - 500000):</td>
+                    <td><input type="number" id="travelTimeLightSpeedInput" min="1" max="500000" step="any" value="1516" disabled /></td>
+                </tr>
+                <tr>
+                    <td>Distance (light years):</td>
+                    <td><input type="number" id="travelTimeLightYearsInput" min="0" step="any" value="4.243" /></td>
+                </tr>
+                <tr>
+                    <td><input type="button" value="Calculate" onClick="calculateTravelTime();" /></td>
+                    <td id="travelTimeOutput"></td>
+                </tr>
+            </table>
+        </form>
+
+        <h2>Stardate &rarr; Date</h2>
+        <form>
+            <table>
+                <tr>
+                    <td>Stardate (-2322000 - 7676999.999999):</td>
+                    <td><input type="number" id="stardateInput" min="-2322000" max="7676999.999999" step="any" value="41153.7" /></td>
+                </tr>
+                <tr>
+                    <td><input type="button" value="Calculate" onClick="calculateStardateToNormalDate();" /></td>
+                    <td id="stardateToNormalDateOutput"></td>
+                </tr>
+                <tr>
+                    <td>Resulting date (UTC):</td>
+                    <td>
+                        <input type="number" id="stardateResultYear" size="4" readonly /> -
+                        <input type="number" id="stardateResultMonth" size="2" readonly /> -
+                        <input type="number" id="stardateResultDay" size="2" readonly />
+                        <input type="number" id="stardateResultHour" size="2" readonly /> :
+                        <input type="number" id="stardateResultMinute" size="2" readonly /> :
+                        <input type="number" id="stardateResultSecond" size="2" readonly />
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+        <h2>Date &rarr; Stardate</h2>
+        <form>
+            <table>
+                <tr>
+                    <td>Date (UTC):</td>
+                    <td>
+                        <input type="number" id="normalDateYear" size="4" value="2364" /> -
+                        <input type="number" id="normalDateMonth" size="2" min="1" max="12" value="2" /> -
+                        <input type="number" id="normalDateDay" size="2" min="1" max="31" value="26" />
+                        <input type="number" id="normalDateHour" size="2" min="0" max="23" value="6" /> :
+                        <input type="number" id="normalDateMinute" size="2" min="0" max="59" value="6" /> :
+                        <input type="number" id="normalDateSecond" size="2" min="0" max="59" value="2" />
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="button" value="Calculate" onClick="calculateNormalDateToStardate();" /></td>
+                    <td id="normalDateToStardateOutput"></td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

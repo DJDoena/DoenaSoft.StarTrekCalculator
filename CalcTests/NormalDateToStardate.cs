@@ -45,4 +45,10 @@ public sealed class NormalDateToStardate
 
         Assert.AreEqual(43997, stardate);
     }
+
+    [TestMethod]
+    public void InvalidDateFails()
+    {
+        Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => new DateTime(2365, 2, 29));
+    }
 }
