@@ -5,6 +5,9 @@
     <File Path="Web/StarTrekCalculatorSolver.js" />
     <File Path="Web/verify-solver.js" />
   </Folder>
+  <Folder Name="/Web/en/">
+    <File Path="Web/en/index.html" />
+  </Folder>
   <Project Path="CalcTests/CalcTests.csproj" />
   <Project Path="DoenaSoft.StarTrekCalculator/DoenaSoft.StarTrekCalculator.vbproj" />
 </Solution>

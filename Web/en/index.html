@@ -1,23 +1,23 @@
 <!DOCTYPE HTML>
-<html lang="de">
+<html lang="en">
     <head>
-        <title>Star Trek Rechner - Warpfaktor, Lichtgeschwindigkeit &amp; Sternzeit-Umrechner</title>
+        <title>Star Trek Calculator - Warp Factor, Light Speed &amp; Stardate Converter</title>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width; initial-scale=1" />
-        <meta name="description" content="Kostenloser Online Star Trek Rechner: Wandle Warpfaktor in Lichtgeschwindigkeit um, Lichtgeschwindigkeit in Warpfaktor, berechne die Reisezeit und wandle zwischen Sternzeit und Kalenderdatum um." />
-        <meta name="keywords" content="Star Trek, Star Trek Rechner, Warpfaktor, Warpgeschwindigkeit, Lichtgeschwindigkeit Rechner, Sternzeit Umrechner, Sternzeit Rechner, Reisezeit Rechner, Star Trek TNG" />
+        <meta name="description" content="Free online Star Trek calculator: convert Warp factor to light speed, light speed to Warp factor, calculate travel time, and convert between Stardates and calendar dates." />
+        <meta name="keywords" content="Star Trek, Star Trek calculator, Warp factor, Warp speed, light speed calculator, Stardate converter, Stardate calculator, travel time calculator, Star Trek TNG" />
         <meta name="author" content="DJDoena" />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://doena-soft.de/StarTrekCalc/index.html" />
-        <link rel="alternate" hreflang="de" href="https://doena-soft.de/StarTrekCalc/index.html" />
+        <link rel="canonical" href="https://doena-soft.de/StarTrekCalc/en/index.html" />
         <link rel="alternate" hreflang="en" href="https://doena-soft.de/StarTrekCalc/en/index.html" />
-        <meta property="og:title" content="Star Trek Rechner" />
-        <meta property="og:description" content="Wandle Warpfaktor in Lichtgeschwindigkeit um, Lichtgeschwindigkeit in Warpfaktor, Reisezeit und Sternzeit in Kalenderdatum." />
+        <link rel="alternate" hreflang="de" href="https://doena-soft.de/StarTrekCalc/index.html" />
+        <meta property="og:title" content="Star Trek Calculator" />
+        <meta property="og:description" content="Convert Warp factor to light speed, light speed to Warp factor, travel time, and Stardates to calendar dates." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://doena-soft.de/StarTrekCalc/index.html" />
-        <meta property="og:locale" content="de_DE" />
-        <script src="StarTrekCalculatorSolver.js"></script>
-        <script src="StarTrekCalculator.js"></script>
+        <meta property="og:url" content="https://doena-soft.de/StarTrekCalc/en/index.html" />
+        <meta property="og:locale" content="en_US" />
+        <script src="../StarTrekCalculatorSolver.js"></script>
+        <script src="../StarTrekCalculator.js"></script>
         <style>
             table td, table th
             {
@@ -26,88 +26,87 @@
         </style>
     </head>
     <body style="font-family: Verdana, Geneva, sans-serif;" onload="toggleTravelTimeInputMode();">
-        <h1>Star Trek Rechner</h1>
+        <h1>Star Trek Calculator</h1>
         <p>
-            Dieser Rechner rechnet zwischen Warpfaktor, einem Vielfachen der Lichtgeschwindigkeit,
-            Reisezeit und Sternzeit um – nach der Skala, die ab &quot;Raumschiff Enterprise – Das
-            nächste Jahrhundert&quot; (TNG) verwendet wird. Anders als in der Originalserie steigt die
-            Geschwindigkeit auf dieser Skala nicht linear mit dem Warpfaktor: Warp 1 entspricht genau
-            Lichtgeschwindigkeit, doch bereits Warp 9 entspricht etwa dem 1516-fachen davon, und die
-            Kurve nähert sich einer theoretischen Obergrenze bei Warp 10 immer schneller an, ohne sie je
-            zu erreichen (Warp 9.999999 entspricht bereits dem 500.000-fachen der Lichtgeschwindigkeit).
-            Die Sternzeit wiederum ist das In-Universum-Datumssystem der TNG-Ära: Sie läuft ab dem Jahr
-            2323 linear mit rund 1000 Einheiten pro Kalenderjahr, sodass sich Bruchteile eines Jahres
-            direkt am Nachkommateil ablesen lassen, ohne sich um Monate, Zeitzonen oder Schaltjahre
-            kümmern zu müssen.
+            This calculator converts between Warp factor, a multiple of light speed, travel time,
+            and Stardate, using the scale introduced with "Star Trek: The Next Generation" (TNG).
+            Unlike in the original series, speed on this scale does not increase linearly with the
+            Warp factor: Warp 1 is exactly light speed, but Warp 9 is already about 1516 times light
+            speed, and the curve approaches a theoretical asymptote at Warp 10 ever more steeply
+            without ever reaching it (Warp 9.999999 already corresponds to 500,000 times light
+            speed). The Stardate, in turn, is the in-universe date system of the TNG era: starting
+            in the year 2323, it advances linearly by roughly 1000 units per calendar year, so
+            fractions of a year can be read directly off the decimal part, without having to worry
+            about months, time zones, or leap years.
         </p>
 
-        <h2>Warpfaktor &rarr; Lichtgeschwindigkeit</h2>
+        <h2>Warp Factor &rarr; Light Speed</h2>
         <form>
             <table>
                 <tr>
-                    <td>Warpfaktor (1 - 9.999999):</td>
+                    <td>Warp factor (1 - 9.999999):</td>
                     <td><input type="number" id="warpFactorInput" min="1" max="9.999999" step="any" value="9" /></td>
                 </tr>
                 <tr>
-                    <td><input type="button" value="Berechnen" onClick="calculateWarpToLightSpeed('de');" /></td>
+                    <td><input type="button" value="Calculate" onClick="calculateWarpToLightSpeed('en');" /></td>
                     <td id="warpToLightSpeedOutput"></td>
                 </tr>
             </table>
         </form>
 
-        <h2>Lichtgeschwindigkeit &rarr; Warpfaktor</h2>
+        <h2>Light Speed &rarr; Warp Factor</h2>
         <form>
             <table>
                 <tr>
-                    <td>Vielfaches der Lichtgeschwindigkeit (1 - 500000):</td>
+                    <td>Multiple of light speed (1 - 500000):</td>
                     <td><input type="number" id="lightSpeedInput" min="1" max="500000" step="any" value="1516" /></td>
                 </tr>
                 <tr>
-                    <td><input type="button" value="Berechnen" onClick="calculateLightSpeedToWarp('de');" /></td>
+                    <td><input type="button" value="Calculate" onClick="calculateLightSpeedToWarp('en');" /></td>
                     <td id="lightSpeedToWarpOutput"></td>
                 </tr>
             </table>
         </form>
 
-        <h2>Reisezeit</h2>
+        <h2>Travel Time</h2>
         <form>
             <table>
                 <tr>
-                    <td><input type="checkbox" id="travelTimeUseWarp" checked onClick="toggleTravelTimeInputMode();" /> Warpfaktor anstelle des Lichtgeschwindigkeits-Vielfachen verwenden</td>
+                    <td><input type="checkbox" id="travelTimeUseWarp" checked onClick="toggleTravelTimeInputMode();" /> Use Warp factor instead of light speed multiple</td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td>Warpfaktor (1 - 9.999999):</td>
+                    <td>Warp factor (1 - 9.999999):</td>
                     <td><input type="number" id="travelTimeWarpInput" min="1" max="9.999999" step="any" value="9" /></td>
                 </tr>
                 <tr>
-                    <td>Vielfaches der Lichtgeschwindigkeit (1 - 500000):</td>
+                    <td>Multiple of light speed (1 - 500000):</td>
                     <td><input type="number" id="travelTimeLightSpeedInput" min="1" max="500000" step="any" value="1516" disabled /></td>
                 </tr>
                 <tr>
-                    <td>Entfernung (Lichtjahre):</td>
+                    <td>Distance (light years):</td>
                     <td><input type="number" id="travelTimeLightYearsInput" min="0" step="any" value="4.243" /></td>
                 </tr>
                 <tr>
-                    <td><input type="button" value="Berechnen" onClick="calculateTravelTime('de');" /></td>
+                    <td><input type="button" value="Calculate" onClick="calculateTravelTime('en');" /></td>
                     <td id="travelTimeOutput"></td>
                 </tr>
             </table>
         </form>
 
-        <h2>Sternzeit &rarr; Datum</h2>
+        <h2>Stardate &rarr; Date</h2>
         <form>
             <table>
                 <tr>
-                    <td>Sternzeit (-2322000 - 7676999.999999):</td>
+                    <td>Stardate (-2322000 - 7676999.999999):</td>
                     <td><input type="number" id="stardateInput" min="-2322000" max="7676999.999999" step="any" value="41153.7" /></td>
                 </tr>
                 <tr>
-                    <td><input type="button" value="Berechnen" onClick="calculateStardateToNormalDate('de');" /></td>
+                    <td><input type="button" value="Calculate" onClick="calculateStardateToNormalDate('en');" /></td>
                     <td id="stardateToNormalDateOutput"></td>
                 </tr>
                 <tr>
-                    <td>Ergebnisdatum (UTC):</td>
+                    <td>Resulting date (UTC):</td>
                     <td>
                         <input type="number" id="stardateResultYear" size="4" readonly /> -
                         <input type="number" id="stardateResultMonth" size="2" readonly /> -
@@ -120,11 +119,11 @@
             </table>
         </form>
 
-        <h2>Datum &rarr; Sternzeit</h2>
+        <h2>Date &rarr; Stardate</h2>
         <form>
             <table>
                 <tr>
-                    <td>Datum (UTC):</td>
+                    <td>Date (UTC):</td>
                     <td>
                         <input type="number" id="normalDateYear" size="4" value="2364" /> -
                         <input type="number" id="normalDateMonth" size="2" min="1" max="12" value="2" /> -
@@ -135,13 +134,13 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><input type="button" value="Berechnen" onClick="calculateNormalDateToStardate('de');" /></td>
+                    <td><input type="button" value="Calculate" onClick="calculateNormalDateToStardate('en');" /></td>
                     <td id="normalDateToStardateOutput"></td>
                 </tr>
             </table>
         </form>
         <p>
-            <a href="en/index.html">in English</a>
+            <a href="../index.html">auf Deutsch</a>
         </p>
     </body>
 </html>

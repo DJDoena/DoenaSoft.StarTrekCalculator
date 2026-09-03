@@ -12,9 +12,19 @@ const MinStardate = -2322000;
 const MaxStardate = 7676999.999999;
 
 // Equivalent of DoenaSoft.StarTrekCalculator.CalculationException: thrown whenever an input
-// is outside of the supported range for a calculation.
+// is outside of the supported range for a calculation. `code` identifies the error for
+// translation purposes (see the Translations dictionary in StarTrekCalculator.js) and
+// `params` holds the values to interpolate into the translated message.
 class CalculationError extends Error
 {
+    constructor(message, code, params)
+    {
+        super(message);
+
+        this.code = code;
+
+        this.params = params || [];
+    }
 }
 
 // Equivalent of DoenaSoft.StarTrekCalculator.TravelTime: a plain result object describing a
@@ -71,7 +81,7 @@ function lightSpeedToWarp(lightSpeed)
     }
     else
     {
-        throw new CalculationError(`Lightspeed is smaller than ${MinLightSpeed} or bigger than ${MaxLightSpeed}`);
+        throw new CalculationError(`Lightspeed is smaller than ${MinLightSpeed} or bigger than ${MaxLightSpeed}`, "lightSpeedOutOfRange", [MinLightSpeed, MaxLightSpeed]);
     }
 }
 
@@ -231,12 +241,12 @@ function lightSpeedToTravelTime(lightSpeed, lightYears)
         }
         else
         {
-            throw new CalculationError("Distance is lower than 0.");
+            throw new CalculationError("Distance is lower than 0.", "distanceNegative", []);
         }
     }
     else
     {
-        throw new CalculationError(`Lightspeed is lower than ${MinLightSpeed}`);
+        throw new CalculationError(`Lightspeed is lower than ${MinLightSpeed}`, "lightSpeedTooLow", [MinLightSpeed]);
     }
 }
 
@@ -277,7 +287,7 @@ function calculateLightSpeed(warpFactor, internalCall)
     }
     else
     {
-        throw new CalculationError(`Warpfactor smaller than ${MinWarpFactor} or bigger than ${MaxWarpFactor}`);
+        throw new CalculationError(`Warpfactor smaller than ${MinWarpFactor} or bigger than ${MaxWarpFactor}`, "warpFactorOutOfRange", [MinWarpFactor, MaxWarpFactor]);
     }
 }
 
@@ -305,7 +315,7 @@ function stardateToNormalDate(stardate)
 {
     if(stardate < MinStardate || stardate > MaxStardate)
     {
-        throw new CalculationError(`Stardate is smaller than ${MinStardate} or bigger than ${MaxStardate}`);
+        throw new CalculationError(`Stardate is smaller than ${MinStardate} or bigger than ${MaxStardate}`, "stardateOutOfRange", [MinStardate, MaxStardate]);
     }
 
     stardate = round(stardate, 6);

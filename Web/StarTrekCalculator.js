@@ -19,10 +19,79 @@ function showResult(outputId, text, isError)
     node.style.color = isError ? "red" : "black";
 }
 
+// All user-facing texts, keyed by language. Add a language by adding a new top-level key here.
+const Translations =
+{
+    de:
+    {
+        lightSpeedResult: "${0} mal die Lichtgeschwindigkeit",
+        warpResult: "Warp ${0}",
+        utcSuffix: " UTC",
+        invalidDate: "${0}-${1}-${2} ist kein gültiges Datum.",
+        lightSpeedOutOfRange: "Lichtgeschwindigkeit ist kleiner als ${0} oder größer als ${1}",
+        distanceNegative: "Entfernung ist kleiner als 0.",
+        lightSpeedTooLow: "Lichtgeschwindigkeit ist kleiner als ${0}",
+        warpFactorOutOfRange: "Warpfaktor kleiner als ${0} oder größer als ${1}",
+        stardateOutOfRange: "Sternzeit ist kleiner als ${0} oder größer als ${1}"
+    },
+    en:
+    {
+        lightSpeedResult: "${0} times the speed of light",
+        warpResult: "Warp ${0}",
+        utcSuffix: " UTC",
+        invalidDate: "${0}-${1}-${2} is not a valid date.",
+        lightSpeedOutOfRange: "Lightspeed is smaller than ${0} or bigger than ${1}",
+        distanceNegative: "Distance is lower than 0.",
+        lightSpeedTooLow: "Lightspeed is lower than ${0}",
+        warpFactorOutOfRange: "Warpfactor smaller than ${0} or bigger than ${1}",
+        stardateOutOfRange: "Stardate is smaller than ${0} or bigger than ${1}"
+    }
+};
+
+// Looks up the translation table for the given language code, falling back to English.
+function getTranslations(languageCode)
+{
+    return Translations[languageCode] || Translations.en;
+}
+
+// Replaces "${0}", "${1}", ... placeholders in a translation template with the given values.
+function formatTranslation(template, values)
+{
+    let text = template;
+
+    for(let valueIndex = 0; valueIndex < values.length; valueIndex++)
+    {
+        text = text.replace("${" + valueIndex + "}", values[valueIndex]);
+    }
+
+    return text;
+}
+
+// Translates a CalculationError (thrown by StarTrekCalculatorSolver.js) into the given
+// language, falling back to the error's original (English) message if it has no code.
+function translateError(error, languageCode)
+{
+    if(!error.code)
+    {
+        return error.message;
+    }
+
+    let translations = getTranslations(languageCode);
+
+    let template = translations[error.code];
+
+    if(!template)
+    {
+        return error.message;
+    }
+
+    return formatTranslation(template, error.params);
+}
+
 // Reads the year/month/day/hour/minute/second input fields for a date section (identified by
 // idPrefix) and builds a UTC-based Date from them, matching the UTC-based convention used by
 // the solver's stardateToNormalDate/normalDateToStardate functions.
-function readDateInputs(idPrefix)
+function readDateInputs(idPrefix, languageCode)
 {
     let year = parseInt(getById(idPrefix + "Year").value, 10);
 
@@ -50,7 +119,9 @@ function readDateInputs(idPrefix)
     // instead, to match the .NET behavior.
     if(date.getUTCFullYear() !== year || date.getUTCMonth() !== month - 1 || date.getUTCDate() !== day)
     {
-        throw new CalculationError(`${year}-${month}-${day} is not a valid date.`);
+        let template = getTranslations(languageCode).invalidDate;
+
+        throw new CalculationError(formatTranslation(template, [year, month, day]));
     }
 
     return date;
@@ -74,7 +145,7 @@ function writeDateInputs(idPrefix, date)
 }
 
 // "Warp -> Light Speed" button handler.
-function calculateWarpToLightSpeed()
+function calculateWarpToLightSpeed(languageCode)
 {
     try
     {
@@ -82,16 +153,18 @@ function calculateWarpToLightSpeed()
 
         let lightSpeed = warpToLightSpeed(warpFactor);
 
-        showResult("warpToLightSpeedOutput", `${lightSpeed} times the speed of light`, false);
+        let text = formatTranslation(getTranslations(languageCode).lightSpeedResult, [lightSpeed]);
+
+        showResult("warpToLightSpeedOutput", text, false);
     }
     catch(error)
     {
-        showResult("warpToLightSpeedOutput", error.message, true);
+        showResult("warpToLightSpeedOutput", translateError(error, languageCode), true);
     }
 }
 
 // "Light Speed -> Warp" button handler.
-function calculateLightSpeedToWarp()
+function calculateLightSpeedToWarp(languageCode)
 {
     try
     {
@@ -99,16 +172,18 @@ function calculateLightSpeedToWarp()
 
         let warpFactor = lightSpeedToWarp(lightSpeed);
 
-        showResult("lightSpeedToWarpOutput", `Warp ${warpFactor}`, false);
+        let text = formatTranslation(getTranslations(languageCode).warpResult, [warpFactor]);
+
+        showResult("lightSpeedToWarpOutput", text, false);
     }
     catch(error)
     {
-        showResult("lightSpeedToWarpOutput", error.message, true);
+        showResult("lightSpeedToWarpOutput", translateError(error, languageCode), true);
     }
 }
 
 // "Warp/Light Speed + Distance -> Travel Time" button handler.
-function calculateTravelTime()
+function calculateTravelTime(languageCode)
 {
     try
     {
@@ -135,12 +210,12 @@ function calculateTravelTime()
     }
     catch(error)
     {
-        showResult("travelTimeOutput", error.message, true);
+        showResult("travelTimeOutput", translateError(error, languageCode), true);
     }
 }
 
 // "Stardate -> Date" button handler.
-function calculateStardateToNormalDate()
+function calculateStardateToNormalDate(languageCode)
 {
     try
     {
@@ -150,20 +225,22 @@ function calculateStardateToNormalDate()
 
         writeDateInputs("stardateResult", normalDate);
 
-        showResult("stardateToNormalDateOutput", normalDate.toISOString().replace("T", " ").replace("Z", " UTC"), false);
+        let utcSuffix = getTranslations(languageCode).utcSuffix;
+
+        showResult("stardateToNormalDateOutput", normalDate.toISOString().replace("T", " ").replace("Z", utcSuffix), false);
     }
     catch(error)
     {
-        showResult("stardateToNormalDateOutput", error.message, true);
+        showResult("stardateToNormalDateOutput", translateError(error, languageCode), true);
     }
 }
 
 // "Date -> Stardate" button handler.
-function calculateNormalDateToStardate()
+function calculateNormalDateToStardate(languageCode)
 {
     try
     {
-        let normalDate = readDateInputs("normalDate");
+        let normalDate = readDateInputs("normalDate", languageCode);
 
         let stardate = normalDateToStardate(normalDate);
 
@@ -171,7 +248,7 @@ function calculateNormalDateToStardate()
     }
     catch(error)
     {
-        showResult("normalDateToStardateOutput", error.message, true);
+        showResult("normalDateToStardateOutput", translateError(error, languageCode), true);
     }
 }
 
