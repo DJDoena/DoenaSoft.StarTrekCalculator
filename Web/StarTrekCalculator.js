@@ -127,21 +127,27 @@ function readDateInputs(idPrefix, languageCode)
     return date;
 }
 
+// Formats a number as a two-digit string, e.g. 5 -> "05".
+function pad2(number)
+{
+    return String(number).padStart(2, "0");
+}
+
 // Writes a UTC-based Date into the year/month/day/hour/minute/second input fields for a date
-// section (identified by idPrefix).
+// section (identified by idPrefix). Month/day/hour/minute/second are zero-padded to two digits.
 function writeDateInputs(idPrefix, date)
 {
     getById(idPrefix + "Year").value = date.getUTCFullYear();
 
-    getById(idPrefix + "Month").value = date.getUTCMonth() + 1;
+    getById(idPrefix + "Month").value = pad2(date.getUTCMonth() + 1);
 
-    getById(idPrefix + "Day").value = date.getUTCDate();
+    getById(idPrefix + "Day").value = pad2(date.getUTCDate());
 
-    getById(idPrefix + "Hour").value = date.getUTCHours();
+    getById(idPrefix + "Hour").value = pad2(date.getUTCHours());
 
-    getById(idPrefix + "Minute").value = date.getUTCMinutes();
+    getById(idPrefix + "Minute").value = pad2(date.getUTCMinutes());
 
-    getById(idPrefix + "Second").value = date.getUTCSeconds();
+    getById(idPrefix + "Second").value = pad2(date.getUTCSeconds());
 }
 
 // "Warp -> Light Speed" button handler.

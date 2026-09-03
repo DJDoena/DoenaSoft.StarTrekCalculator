@@ -1,0 +1,122 @@
+body
+{
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 12px;
+}
+
+table
+{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table td, table th
+{
+    padding: 4px 15px;
+}
+
+input[type="number"], input[type="text"]
+{
+    width: 4em;
+    box-sizing: border-box;
+}
+
+input[type="button"]
+{
+    padding: 6px 12px;
+}
+
+.input-wide
+{
+    width: 7em;
+}
+
+.input-xwide
+{
+    width: 12em;
+}
+
+#stardateInput
+{
+    width: 14em;
+    min-width: 14em;
+}
+
+#travelTimeWarpInput, #travelTimeLightSpeedInput, #travelTimeLightYearsInput, #lightSpeedInput, #warpFactorInput
+{
+    width: 10em;
+    min-width: 10em;
+}
+
+.dt-group
+{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.dt-row
+{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px;
+}
+
+.dt-group input[type="number"], .dt-group input[type="text"]
+{
+    width: 4em;
+}
+
+tr.dt-tr
+{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    column-gap: 15px;
+    row-gap: 4px;
+}
+
+tr.dt-tr > td
+{
+    display: block;
+    width: auto;
+    padding: 0;
+}
+
+@media (max-width: 480px)
+{
+    table, tbody, tr, td
+    {
+        display: block;
+        width: 100%;
+    }
+
+    table td
+    {
+        padding: 6px 0;
+    }
+
+    input[type="number"], input[type="text"], input[type="button"]
+    {
+        width: 100%;
+    }
+
+    .dt-group input[type="number"], .dt-group input[type="text"]
+    {
+        width: 4em;
+    }
+
+    #stardateInput
+    {
+        width: 100%;
+        min-width: 0;
+    }
+
+    #travelTimeWarpInput, #travelTimeLightSpeedInput, #travelTimeLightYearsInput, #lightSpeedInput, #warpFactorInput
+    {
+        width: 100%;
+        min-width: 0;
+    }
+}
